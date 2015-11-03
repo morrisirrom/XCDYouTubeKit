@@ -133,11 +133,22 @@ NSString *const XCDYouTubeVideoUserInfoKey = @"Video";
 	}];
 }
 
-- (void) presentInView:(UIView *)view
+- (void) presentInView:(UIView *)view displayControls:(BOOL)displayControls
 {
 	static const void * const XCDYouTubeVideoPlayerViewControllerKey = &XCDYouTubeVideoPlayerViewControllerKey;
 	
 	self.embedded = YES;
+	
+	if(displayControls)
+	{
+		self.moviePlayer.controlStyle = MPMovieControlStyleFullscreen;
+		self.moviePlayer.view.userInteractionEnabled = YES;
+	}
+	else
+	{
+		self.moviePlayer.controlStyle = MPMovieControlStyleNone;
+		self.moviePlayer.view.userInteractionEnabled = NO;
+	}
 	
 	self.moviePlayer.controlStyle = MPMovieControlStyleEmbedded;
 	self.moviePlayer.view.frame = CGRectMake(0, 0, view.bounds.size.width, view.bounds.size.height);
