@@ -122,13 +122,13 @@ NSString *const XCDYouTubeVideoUserInfoKey = @"Video";
 	}];
 }
 
-- (void) presentInView:(UIView *)view
+- (void) presentInView:(UIView *)view displayControls:(BOOL)displayControls
 {
 	static const void * const XCDYouTubeVideoPlayerViewControllerKey = &XCDYouTubeVideoPlayerViewControllerKey;
 	
 	self.embedded = YES;
 	
-    self.moviePlayer.controlStyle = MPMovieControlStyleNone;//MPMovieControlStyleEmbedded;
+	self.moviePlayer.controlStyle = displayControls ? MPMovieControlStyleEmbedded : MPMovieControlStyleNone;
 	self.moviePlayer.view.frame = CGRectMake(0.f, 0.f, view.bounds.size.width, view.bounds.size.height);
 	self.moviePlayer.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	if (![view.subviews containsObject:self.moviePlayer.view])
